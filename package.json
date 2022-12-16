@@ -1,0 +1,19 @@
+{
+  "name": "nest-cucumber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@cucumber/cucumber": "^8.9.0",
+    "@nestjs/common": "^9.2.1",
+    "@nestjs/core": "^9.2.1",
+    "chai": "^4.3.7",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.6.0"
+  }
+}
