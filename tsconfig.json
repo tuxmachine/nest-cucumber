@@ -1,13 +1,27 @@
 {
-  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "lib": ["es2020"],
-    "types": ["node", "jest"],
+    "typeRoots": ["node_modules/@types", "./types"],
+    "types": ["node"],
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
     "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "target": "es2017",
-    "module": "esnext",
-    "strictPropertyInitialization": false,
-    "allowJs": true
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": {}
   },
-  "include": ["**/*.ts"]
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
 }
