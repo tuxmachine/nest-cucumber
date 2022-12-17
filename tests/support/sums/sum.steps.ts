@@ -1,14 +1,13 @@
-import { Logger } from '@nestjs/common';
 import { strict as assert } from 'assert';
-import { Given, InjectWorld, NestWorld, Suite, Then } from '../nest-cucumber';
+import { Given, InjectWorld, NestWorld, Suite, Then } from '../../../lib';
 
 @Suite()
 export class SumSteps {
   private numbers: number[] = [];
-  private readonly logger = new Logger(SumSteps.name);
 
   constructor(@InjectWorld() world: NestWorld) {
-    this.logger.log(world.info);
+    assert.match(world.info.feature, /sums/);
+    assert.match(world.info.scenario, /math/);
   }
 
   @Given('we have a sum of {int} plus {int}')
