@@ -1,6 +1,4 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app/app.module';
+import { AppModule } from './support/app.module';
+import { bootstrap } from './support/nest-cucumber/setup';
 
-(async function () {
-  global.appBootstrap = NestFactory.createApplicationContext(AppModule);
-})();
+bootstrap(AppModule);
