@@ -4,29 +4,31 @@
   "description": "",
   "main": "./dist/lib/index.js",
   "scripts": {
-    "build": "tsc -p tsconfig.lib.json",
+    "clean": "rimraf dist",
+    "build": "pnpm run clean && tsc -p tsconfig.lib.json",
     "build:watch": "tsc --watch -p tsconfig.lib.json",
-    "test": "cucumber-js"
+    "test": "cucumber-js",
+    "lint": "eslint '**/*.ts'",
+    "lint:fix": "eslint --fix '**/*.ts'"
   },
   "author": "Rick Dutour Geerling <rick@trilon.io>",
   "license": "MIT",
-  "dependencies": {},
-  "peerDependencies": {
-    "@cucumber/cucumber": "~8.9.0",
-    "@nestjs/common": "~9.2.1",
-    "@nestjs/core": "~9.2.1",
-    "reflect-metadata": "~0.1.13"
+  "dependencies": {
+    "@cucumber/cucumber": "^8.9.0",
+    "@nestjs/common": "^9.2.1",
+    "@nestjs/core": "^9.2.1",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.6.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.15",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
-    "chai": "^4.3.7",
     "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.1",
-    "rxjs": "^7.6.0",
+    "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.1",
     "typescript": "^4.9.4"
