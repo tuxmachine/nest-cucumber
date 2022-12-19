@@ -1,5 +1,5 @@
 import { strict as assert } from 'assert';
-import { Given, InjectWorld, NestWorld, Suite, Then, When } from '../../../lib';
+import { Given, Suite, Then, When } from '../../../lib';
 
 type Operation = 'addition' | 'subtraction' | 'division' | 'multiplication';
 
@@ -15,11 +15,6 @@ export class ScenarioScopedSuiteSteps {
   private operation: Operation;
   private result: number;
   private numbers: number[] = [];
-
-  constructor(@InjectWorld() world: NestWorld) {
-    assert.match(world.info.feature, /Scenario-scoped/);
-    assert.match(world.info.scenario, /fresh Suite/);
-  }
 
   @Given('we are calculating a {word}')
   setOperation(operation: Operation) {

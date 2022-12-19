@@ -13,7 +13,6 @@ import { GlobalHooks } from './global-hooks';
 @Suite()
 export class RunHooksSteps {
   private readonly hooks: string[] = [];
-  private expected: string[] = [];
   constructor(private readonly globalHooks: GlobalHooks) {}
 
   @Before()
