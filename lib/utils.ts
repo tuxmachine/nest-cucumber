@@ -1,5 +1,6 @@
 import { Scope, Type } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
+import { getApp } from './app';
 import { NestWorld } from './world';
 
 async function callGlobalHook<T extends Type>(
@@ -7,7 +8,7 @@ async function callGlobalHook<T extends Type>(
   method: keyof T,
   args: unknown[],
 ) {
-  const appModule = await global.appBootstrap;
+  const appModule = await getApp();
   const moduleRef = appModule.get(ModuleRef);
   const isStatic = moduleRef.introspect(cls).scope === Scope.DEFAULT;
   if (isStatic) {
@@ -26,7 +27,7 @@ async function callRegularStep<T extends Type>(
   method: keyof T,
   args: unknown[],
 ) {
-  const appModule = await global.appBootstrap;
+  const appModule = await getApp();
   const moduleRef = appModule.get(ModuleRef);
   const isStatic = moduleRef.introspect(cls).scope === Scope.DEFAULT;
   if (isStatic) {

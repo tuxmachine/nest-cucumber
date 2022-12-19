@@ -1,5 +1,6 @@
 import { World } from '@cucumber/cucumber';
 import { ModuleRef } from '@nestjs/core';
+import { getApp } from './app';
 import { once } from './utils';
 
 export class NestWorld extends World {
@@ -14,7 +15,7 @@ export class NestWorld extends World {
   });
 
   public async registerScenario() {
-    const appModule = await global.appBootstrap;
+    const appModule = await getApp();
     const moduleRef = appModule.get(ModuleRef);
     moduleRef.registerRequestByContextId(this, this.contextId);
   }

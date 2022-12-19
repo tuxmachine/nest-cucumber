@@ -1,16 +1,11 @@
 import { Before, BeforeStep, setWorldConstructor } from '@cucumber/cucumber';
-import { INestApplicationContext, Type } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { Type } from '@nestjs/common';
 import 'reflect-metadata';
+import { startApp } from './app';
 import { NestWorld } from './world';
 
-declare global {
-  /* eslint-disable-next-line no-var */
-  var appBootstrap: Promise<INestApplicationContext>;
-}
-
 export const bootstrap = (rootModule: Type) => {
-  global.appBootstrap = NestFactory.createApplicationContext(rootModule);
+  startApp(rootModule);
 
   setWorldConstructor(NestWorld);
 

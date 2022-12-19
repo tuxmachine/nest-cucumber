@@ -54,3 +54,5 @@ export class SumSteps {
   fresh instances are created for every scenario.
 - BeforeAll and AfterAll steps run outside a scenario and thus cannot run
   inside scenario-scope. Make sure they're defined on a static provider.
+- If you want to set a custom world, make sure you extend the NestWorld, the
+  scenario-scoping depends on it
