@@ -2,16 +2,16 @@ import { Scope, Type } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
 import { NestWorld } from './world';
 
-async function callStaticScopedHandler<T extends Type>(
+async function callGlobalHook<T extends Type>(
   cls: T,
   method: keyof T,
   args: unknown[],
 ) {
   const appModule = await global.appBootstrap;
   const moduleRef = appModule.get(ModuleRef);
-  const isStatic = moduleRef.introspect(cls as Type).scope === Scope.DEFAULT;
+  const isStatic = moduleRef.introspect(cls).scope === Scope.DEFAULT;
   if (isStatic) {
-    const instance = appModule.get(cls as Type);
+    const instance = appModule.get(cls);
     return instance[method](...args);
   } else {
     throw new Error(
@@ -20,7 +20,7 @@ async function callStaticScopedHandler<T extends Type>(
   }
 }
 
-async function callScenarioScopedHandler<T extends Type>(
+async function callRegularStep<T extends Type>(
   this: NestWorld,
   cls: T,
   method: keyof T,
@@ -28,9 +28,9 @@ async function callScenarioScopedHandler<T extends Type>(
 ) {
   const appModule = await global.appBootstrap;
   const moduleRef = appModule.get(ModuleRef);
-  const isStatic = moduleRef.introspect(cls as Type).scope === Scope.DEFAULT;
+  const isStatic = moduleRef.introspect(cls).scope === Scope.DEFAULT;
   if (isStatic) {
-    const instance = appModule.get(cls as Type);
+    const instance = appModule.get(cls);
     return instance[method](...args);
   } else {
     const instance = await appModule.resolve(cls, this.contextId);
@@ -43,7 +43,7 @@ export const createStaticNestHandler = <T extends Type>(
   method: keyof T,
 ) => {
   const handler = function (...args: unknown[]) {
-    return callStaticScopedHandler(cls, method, args);
+    return callGlobalHook(cls, method, args);
   };
   Object.defineProperty(handler, 'length', {
     value: (cls.prototype[method] as any).length,
@@ -53,7 +53,7 @@ export const createStaticNestHandler = <T extends Type>(
 
 export const createNestHandler = <T extends Type>(cls: T, method: keyof T) => {
   const handler = function (this: NestWorld, ...args: unknown[]) {
-    return callScenarioScopedHandler.call(this, cls, method, args);
+    return callRegularStep.call(this, cls, method, args);
   };
   Object.defineProperty(handler, 'length', {
     value: (cls.prototype[method] as any).length,

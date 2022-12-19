@@ -1,9 +1,8 @@
 import { Before, BeforeStep, setWorldConstructor } from '@cucumber/cucumber';
-import { Type } from '@nestjs/common';
+import { INestApplicationContext, Type } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import 'reflect-metadata';
 import { NestWorld } from './world';
-import { INestApplicationContext } from '@nestjs/common';
 
 declare global {
   /* eslint-disable-next-line no-var */
@@ -20,7 +19,8 @@ export const bootstrap = (rootModule: Type) => {
   });
 
   BeforeStep(function (this: NestWorld, { gherkinDocument, pickle }) {
-    this.info.feature = gherkinDocument.feature.name;
-    this.info.scenario = pickle.name;
+    const feature = gherkinDocument.feature.name;
+    const scenario = pickle.name;
+    this.setInfo(feature, scenario);
   });
 };

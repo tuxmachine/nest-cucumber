@@ -12,60 +12,77 @@ import { GlobalHooks } from './global-hooks';
 
 @Suite()
 export class RunHooksSteps {
-  private readonly hooks = {
-    before: false,
-    beforeTagged: false,
-    beforeStep: false,
-    after: false,
-    afterTagged: false,
-    afterStep: false,
-  };
-
+  private readonly hooks: string[] = [];
+  private expected: string[] = [];
   constructor(private readonly globalHooks: GlobalHooks) {}
 
   @Before()
   beforeHook() {
-    this.hooks.before = true;
+    this.hooks.push('before');
   }
 
   @Before('@foo')
   taggedBeforeHook() {
-    this.hooks.beforeTagged = true;
+    this.hooks.push('beforeTagged');
   }
 
   @BeforeStep()
   beforeStepHook(opts: any) {
     assert.notEqual(opts, undefined);
-    this.hooks.beforeStep = true;
-  }
-
-  @After()
-  AfterHook() {
-    this.hooks.after = true;
-  }
-
-  @After('@foo')
-  taggedAfterHook() {
-    this.hooks.afterTagged = true;
+    if (!this.hooks.includes('beforeStep')) {
+      this.hooks.push('beforeStep');
+    }
   }
 
   @AfterStep()
   afterStepHook(opts: any) {
     assert.notEqual(opts, undefined);
-    this.hooks.afterStep = true;
+    if (!this.hooks.includes('afterStep')) {
+      this.hooks.push('afterStep');
+    }
   }
 
-  @Given(/we have a scenario/)
-  noop() {
+  @After()
+  AfterHook() {
+    this.hooks.push('after');
+  }
+
+  @After('@foo')
+  taggedAfterHook() {
+    this.hooks.push('afterTagged');
+  }
+
+  @Given('we have a {word} scenario')
+  noop(_type: string) {
     // do nothing
   }
 
-  @Then('all hooks should run')
-  assertAllHooks() {
+  @Then(/regular hooks should run in order/)
+  assertHookOrderRegular() {
     // run a little later, so the after hook also runs
     setTimeout(() => {
-      const allHooksRun = Object.values(this.hooks).every((x) => x);
-      assert(allHooksRun, JSON.stringify(this.hooks));
+      assert.deepEqual(this.hooks, [
+        'before',
+        'beforeStep',
+        'afterStep',
+        'after',
+      ]);
+      this.globalHooks.verify();
+    });
+  }
+
+  @Then(/all hooks should run in order/)
+  assertHookOrderAll() {
+    // run a little later, so the after hook also runs
+    setTimeout(() => {
+      assert.deepEqual(this.hooks, [
+        'before',
+        'beforeTagged',
+        'beforeStep',
+        'afterStep',
+        'afterTagged',
+        'after',
+      ]);
       this.globalHooks.verify();
     });
   }
