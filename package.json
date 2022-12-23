@@ -8,8 +8,8 @@
     "build": "pnpm run clean && tsc -p tsconfig.lib.json",
     "build:watch": "tsc --watch -p tsconfig.lib.json",
     "test": "cucumber-js",
-    "lint": "eslint '**/*.ts'",
-    "lint:fix": "eslint --fix '**/*.ts'",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "prepare": "husky install"
   },
   "author": "Rick Dutour Geerling <rick@trilon.io>",
@@ -30,6 +30,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "git-commit-msg-linter": "4.5.0",
     "husky": "8.0.0",
+    "lint-staged": "13.1.0",
     "prettier": "^2.8.1",
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
