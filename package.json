@@ -9,7 +9,8 @@
     "build:watch": "tsc --watch -p tsconfig.lib.json",
     "test": "cucumber-js",
     "lint": "eslint '**/*.ts'",
-    "lint:fix": "eslint --fix '**/*.ts'"
+    "lint:fix": "eslint --fix '**/*.ts'",
+    "prepare": "husky install"
   },
   "author": "Rick Dutour Geerling <rick@trilon.io>",
   "license": "MIT",
@@ -31,6 +32,7 @@
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.1",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "husky": "8.0.0"
   }
 }
