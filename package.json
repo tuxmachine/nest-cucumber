@@ -10,7 +10,8 @@
     "test": "cucumber-js",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
   },
   "author": "Rick Dutour Geerling <rick@trilon.io>",
   "license": "MIT",

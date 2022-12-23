@@ -1,3 +1,4 @@
 {
-  "*.ts": ["pnpm run lint:fix", "pnpm run test"]
+  "*.{ts,feature}": ["pnpm run lint:fix"],
+  "*.feature": ["pnpm run test"]
 }
