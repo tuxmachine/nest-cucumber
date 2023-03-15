@@ -1,0 +1,26 @@
+name: Review
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    name: Run tests
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.25.0
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.node-version'
+          cache: 'pnpm'
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Lint files
+        run: pnpm run lint
+      - name: Run tests
+        run: pnpm run test
