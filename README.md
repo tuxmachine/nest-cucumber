@@ -6,12 +6,11 @@ leveraging NestJS as a dependency-injection container instead. This allows for
 a very lean implementation and is compatible with a wide array of community
 modules.
 
-**NOTE:** This library is experimental and may contain strange bugs. I'll
-publish it to NPM when it has some proven stability.
+**NOTE:** This library is experimental, please report any bugs you encounter
 
 ## Usage
 
-1. Install the library with your favourite package manager (e.g.: `npm install --dev tuxmachine/nest-cucumber@master`)
+1. Install the library with your favourite package manager (e.g.: `npm install --dev @tuxmachine/nest-cucumber`)
 2. Create an entry file to bootstrap your tests:
 
 ```ts

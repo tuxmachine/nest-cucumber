@@ -1,5 +1,5 @@
 {
-  "name": "nest-cucumber",
+  "name": "@tuxmachine/nest-cucumber",
   "version": "0.1.0",
   "description": "",
   "types": "./dist/types/index.d.js",
