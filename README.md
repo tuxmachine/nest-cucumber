@@ -14,8 +14,8 @@ modules.
 2. Create an entry file to bootstrap your tests:
 
 ```ts
+import { bootstrap } from '@tuxmachine/nest-cucumber';
 import { AppModule } from './support/app.module';
-import { bootstrap } from 'nest-cucumber';
 
 bootstrap(AppModule);
 ```

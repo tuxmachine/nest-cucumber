@@ -1,7 +1,16 @@
 {
   "name": "@tuxmachine/nest-cucumber",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.1.1",
+  "description": "Use NestJS to structure your Cucumber tests",
+  "keywords": [
+    "cucumber",
+    "tests",
+    "nest",
+    "nestjs",
+    "gherkin",
+    "testing",
+    "bdd"
+  ],
   "types": "./dist/types/index.d.js",
   "main": "./dist/index.js",
   "files": [
@@ -11,7 +20,7 @@
     "LICENCE.md"
   ],
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist tsconfig.lib.tsbuildinfo",
     "build": "pnpm run clean && tsc -p tsconfig.lib.json",
     "build:watch": "tsc --watch -p tsconfig.lib.json",
     "test": "cucumber-js",
