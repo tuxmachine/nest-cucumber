@@ -2,7 +2,14 @@
   "name": "nest-cucumber",
   "version": "0.1.0",
   "description": "",
-  "main": "./dist/lib/index.js",
+  "types": "./dist/types/index.d.js",
+  "main": "./dist/index.js",
+  "files": [
+    "dist/**/*",
+    "package.json",
+    "README.md",
+    "LICENCE.md"
+  ],
   "scripts": {
     "clean": "rimraf dist",
     "build": "pnpm run clean && tsc -p tsconfig.lib.json",
@@ -11,7 +18,8 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "prepack": "pnpm run build"
   },
   "author": "Rick Dutour Geerling <rick@trilon.io>",
   "license": "MIT",
