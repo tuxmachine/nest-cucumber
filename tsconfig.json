@@ -10,7 +10,7 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "declarationDir": "./dist/types",
+    "declarationDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,

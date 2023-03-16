@@ -10,6 +10,7 @@ export function startApp(rootModule: Type) {
       process.exit(1);
     },
   );
+  return appPromise;
 }
 
 export async function getApp() {
