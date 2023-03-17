@@ -1,6 +1,6 @@
 {
   "name": "@tuxmachine/nest-cucumber",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Use NestJS to structure your Cucumber tests",
   "keywords": [
     "cucumber",
